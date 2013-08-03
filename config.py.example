@@ -1,0 +1,16 @@
+#log file name where misc log will be appended
+log_file = "log.txt"
+#uiuc enterprise credentials   !!!silently fails if the password/username are wrong :(
+enterprise = ["net-id", "enterprise-password"]
+#gmail username and password to send email 
+gmail = ["gmail-username", "gmail-password"] 
+#add as many email that are to by notified here
+email_to = ["IconstantlyCheckThis@email.com"] 
+#time interval between checks, try to keep it atleast 15mins, else cites might come get you!
+time_interval = 60*60 
+#add all the courses down to the specific crn no that are to be checked
+#unfortunately you'll have to add lecture and lab section
+courses=[
+	["CS",411,41612],
+	["MATH",415,34503]
+]

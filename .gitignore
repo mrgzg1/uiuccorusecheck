@@ -1,5 +1,16 @@
-*.py[cod]
+# Ignore all the virtualenv stuff except the actual packages
+# themselves
+/bin
+/include
+/lib/python*/*
+!/lib/python*/site-packages
 
+config.py
+*.txt
+*.DS_store
+
+*.py[cod]
+*.python
 # C extensions
 *.so
 
