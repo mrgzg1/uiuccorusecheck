@@ -55,10 +55,10 @@ def get_course_table(br, subj_code, subj_no):
     br["sel_crse"] = R_COURSE = str(subj_no)
     resp = br.submit().read()
 
-    f_name = str(subj_code)+"_"+str(subj_no)+".txt"
-    f2 = open("raw_"+f_name, "w")
-    f2.write(resp)
-    f2.close()
+    # f_name = str(subj_code)+"_"+str(subj_no)+".txt"
+    # f2 = open("raw_"+f_name, "w")
+    # f2.write(resp)
+    # f2.close()
 
     return resp
 
