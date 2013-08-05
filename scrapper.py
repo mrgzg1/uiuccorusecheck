@@ -5,19 +5,33 @@ import getpass
 import time
 import smtplib  
 
-def email(subj_code, subj_no, crn_no):
+def email(to, subj, msg):
     #http://www.pythonforbeginners.com/code-snippets-source-code/using-python-to-send-email/
     header  = 'From: %s\n' % gmail[0]
-    header += 'To: %s\n' % ','.join(email_to)
+    header += 'To: %s\n' % ','.join(to)
     header += 'Cc: %s\n' % ','.join([])
-    header += 'Subject: COURSE REGISTRATION!!!\n\n'
-    message = header + "REGISTER FAST!!! "+subj_code+" "+str(subj_no)+" "+str(crn_no)+" is available!" 
+    header += 'Subject: '+subj+'\n\n'
+    message = header +  msg
   
     server = smtplib.SMTP('smtp.gmail.com:587')
     server.starttls()
     server.login(gmail[0],gmail[1])
     problems = server.sendmail(gmail[0], email_to, message)
     server.quit()
+
+def course_email(subj_code, subj_no, crn_no):
+    subject = "Course Registration!!!"
+    message = "REGISTER FAST!!! "+subj_code+" "+str(subj_no)+" "+str(crn_no)+" is available!"
+    to = email_to
+    email(to, subject, message)
+
+def test_email():
+    to = email_to
+    subj = "Test Course Check"
+    message = "This is just a test email. Script to check the following courses has started. It will run every "+str(time_interval/60)+" mins"
+    for each in courses:
+        message += "\n"+each[0]+str(each[1])+" crn:"+str(each[2])
+    email(to, subj, message)
 
 def login(br):
     #go past the login page
@@ -87,7 +101,7 @@ def check_course(br, subj_code, subj_no, crn_no):
     if parse_page(resp, crn_no):
         text = subj_code+" "+str(subj_no)+" is available"
         append_to_log(text)
-        email(subj_code, subj_no, crn_no) #email the user
+        course_email(subj_code, subj_no, crn_no) #email the user
     else:
         text = subj_code+" "+str(subj_no)+" is un-available"
         append_to_log(text)
@@ -114,6 +128,7 @@ def check_log_file():
        f.close()
 
 check_log_file()
+test_email()
 while(1):
     append_to_log("running check")
     run_routine()
