@@ -131,6 +131,9 @@ check_log_file()
 test_email()
 while(1):
     append_to_log("running check")
-    run_routine()
+    try:
+        run_routine()
+    except:
+        append_to_log("ERROR")
     time.sleep(time_interval)
     
